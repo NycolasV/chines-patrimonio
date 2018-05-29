@@ -1,0 +1,42 @@
+section{
+	margin: 3% !important;	
+}	
+
+h1{
+	text-align: center !important;
+	color: black !important;
+	font-weight: bold !important;
+	font-size: 30dp !important;	
+}
+
+h3{
+	text-align: center !important;
+	color: black !important;
+	font-weight: bold !important;
+	font-size: 20dp !important;
+}
+
+.materialize-red{
+	background-color: #a51b1b !important;
+}
+
+.error{
+	color: red;
+	font-size: 14sp;
+}
+
+.flex-1{flex: 1;}
+.flex-2{flex: 2;}
+.flex-3{flex: 3;}
+
+@media only screen and (max-width: 800px) {
+    img{display: none;}
+}
+
+.switch label input[type=checkbox]:checked+.lever{
+	background-color: #C84120 !important;
+}
+
+.switch label input[type=checkbox]:checked+.lever:after{
+	background-color: #a51b1b !important;
+}
