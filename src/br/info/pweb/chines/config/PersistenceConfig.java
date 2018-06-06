@@ -21,7 +21,7 @@ public class PersistenceConfig {
 		BasicDataSource dataSource = new BasicDataSource();
 		
 		dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-		dataSource.setUrl("jdbc:mysql://localhost:3306/db_chinesPatrimonio?serverTimezone=UTC");
+		dataSource.setUrl("jdbc:mysql://localhost:3306/db_chines_patrimonio?serverTimezone=UTC");
 		dataSource.setUsername("root");
 		dataSource.setPassword("root132");
 		
@@ -32,7 +32,7 @@ public class PersistenceConfig {
 		Properties properties = new Properties();
 		
 		properties.setProperty("hibernate.show_sql", "true");
-		properties.setProperty("hibernate.hbm2ddl.auto", "update");
+		properties.setProperty("hibernate.hbm2ddl.auto", "create");
 		properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 		
 		return properties;

@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -62,21 +61,22 @@ public class MovimentacaoController {
 	public String movimentarItemPatrimonio(@Valid ItemPatrimonio itemPatrimonio, BindingResult brItemMovimentado,
 			@RequestParam(name = "id", required = true) Long id, Model model) {
 		
-		itemPatrimonio.setDataAtualizacao(new Date());
 		ItemPatrimonio itemMovimentado = itemPatrimonioDAO.buscar(id);
-		BeanUtils.copyProperties(itemPatrimonio, itemMovimentado, "id", "usuario", "patrimonio");
 	
 		Movimentacao movimentacao = new Movimentacao();
 		movimentacao.setItem(itemMovimentado);
-		movimentacao.setAmbienteOrigem(itemPatrimonio.getAmbienteAtual());		
-		movimentacao.setAmbienteDestino(itemMovimentado.getAmbienteAtual());	
+		movimentacao.setAmbienteOrigem(itemMovimentado.getAmbienteAtual());		
+		movimentacao.setAmbienteDestino(itemPatrimonio.getAmbienteAtual());	
 		movimentacao.setDataMovimentacao(new Date());
 		
 		Usuario usuarioLogado = session.getLogin();
 		movimentacao.setUsuario(usuarioLogado);
 		
-		itemPatrimonioDAO.alterar(itemMovimentado);
+		itemMovimentado.setDataAtualizacao(new Date());
+		itemMovimentado.setAmbienteAtual(itemPatrimonio.getAmbienteAtual());
+		
 		movimentacaoDAO.persistir(movimentacao);			
+		itemPatrimonioDAO.alterar(itemMovimentado);
 		
 		return "redirect:/app/item-patrimonio";
 	}
