@@ -16,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.util.DigestUtils;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.internal.NotNull;
 
 @Entity
@@ -145,8 +146,9 @@ public class Usuario implements Authentication {
 	}
 
 	@Override
+	@JsonIgnore
 	public Object getPrincipal() {
-		return null;
+		return this;
 	}
 
 	@Override

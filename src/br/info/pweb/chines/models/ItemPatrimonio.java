@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,17 +21,17 @@ public class ItemPatrimonio {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@ManyToOne
+	 
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "patrimonio_id", nullable = false)
 	private Patrimonio patrimonio;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "usuario_id", nullable = false)
 	private Usuario usuario;
 	
-	@ManyToOne
-//	@ManyToOne(cascade = CascadeType.REMOVE)
+	@ManyToOne(fetch = FetchType.EAGER)
+	//	@ManyToOne(cascade = CascadeType.REMOVE)
 	@JoinColumn(name = "ambienteAtual_id", nullable = false)
 	private Ambiente ambienteAtual;
 

@@ -1,5 +1,7 @@
 package br.info.pweb.chines.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
@@ -30,6 +32,20 @@ public class UsuarioService {
 		}
 		
 		return usuarioLogado;
+	}
+	
+	public List<Usuario> listar() {
+		return usuarioDAO.listar();
+	}
+	
+	public Usuario buscar(Long id) throws MyEntityNotFoundException {
+		Usuario usuarioBuscado = usuarioDAO.buscar(id);
+		
+		if (usuarioBuscado == null) {
+			throw new MyEntityNotFoundException();
+		}
+		
+		return usuarioBuscado;
 	}
 	
 }
