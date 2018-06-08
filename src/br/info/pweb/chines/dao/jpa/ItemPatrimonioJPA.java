@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.info.pweb.chines.dao.ItemPatrimonioDAO;
 import br.info.pweb.chines.models.ItemPatrimonio;
-import br.info.pweb.chines.models.Patrimonio;
 
 @Repository
 @Transactional
@@ -51,27 +50,16 @@ public class ItemPatrimonioJPA implements ItemPatrimonioDAO {
 		}
 	}
 
-
 	@Override
-	public List<ItemPatrimonio> buscarPatrimonio(Patrimonio patrimonio) {
-/*
-		String hql = "FROM ItemPatrimonio i ";
+	@SuppressWarnings("unchecked")
+	public List<ItemPatrimonio> buscarPatrimonio(Long id) {
+		String hql = "FROM ItemPatrimonio i "
+				+ "INNER JOIN Patrimonio p WHERE i.patrimonio_id = :p.id AND p.id = :id";
 		
-		switch (patrimonio.getNome()) {
-		case AGUARDANDO:
-			hql += "WHERE o.tecnico IS NULL";
-			break;
-		case EM_ATENDIMENTO:
-			hql += "WHERE o.tecnico IS NOT NULL AND o.dataConclusao IS NULL";
-			break;
-		case ENCERRADO:
-			hql += "WHERE o.dataConclusao IS NOT NULL";
-			break;
-		}
-
-		return sessionFactory.getCurrentSession().createQuery(hql).list();
-*/
-		return null;
+		Query query = sessionFactory.getCurrentSession().createQuery(hql);
+		query.setParameter("id", id);
+		
+		return query.list();
 	}
 	
 	@Override
@@ -82,5 +70,6 @@ public class ItemPatrimonioJPA implements ItemPatrimonioDAO {
 		
 		return query.list();
 	}
+
 	
 }

@@ -38,7 +38,8 @@ public class MovimentacaoService {
 		
 		Movimentacao movimentacaoBuscada = movimentacaoDAO.buscar(id);
 		
-		if (movimentacaoBuscada == null) {
+		if (movimentacaoBuscada == null) 
+		{
 			throw new MyEntityNotFoundException();
 		}
 		
@@ -48,7 +49,8 @@ public class MovimentacaoService {
 	public ItemPatrimonio movimentar(Long id, ItemPatrimonio itemPatrimonio,
 			BindingResult brItemPatrimonio) throws MyValidationException, MyEntityNotFoundException  {
 
-		if (brItemPatrimonio.hasErrors()) {			
+		if (brItemPatrimonio.hasErrors())
+		{			
 			throw new MyValidationException();
 		}
 		

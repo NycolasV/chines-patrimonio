@@ -22,7 +22,8 @@ public class PatrimonioService {
 	public Patrimonio buscar(Long id) throws MyEntityNotFoundException {
 		Patrimonio patrimonioBuscado = patrimonioDAO.buscar(id);
 		
-		if (patrimonioBuscado == null) {
+		if (patrimonioBuscado == null)
+		{
 			throw new MyEntityNotFoundException();
 		}
 		

@@ -22,7 +22,8 @@ public class CategoriaService {
 	public Categoria buscar(Long id) throws MyEntityNotFoundException {
 		Categoria categoriaBuscada = categoriaDAO.buscar(id);
 		
-		if (categoriaBuscada == null) {
+		if (categoriaBuscada == null) 
+		{
 			throw new MyEntityNotFoundException();
 		}
 		

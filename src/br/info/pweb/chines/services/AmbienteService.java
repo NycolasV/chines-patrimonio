@@ -22,7 +22,8 @@ public class AmbienteService {
 	public Ambiente buscar(Long id) throws MyEntityNotFoundException {
 		Ambiente ambienteBuscado = ambienteDAO.buscar(id);
 		
-		if (ambienteBuscado == null) {
+		if (ambienteBuscado == null) 
+		{
 			throw new MyEntityNotFoundException();
 		}
 		

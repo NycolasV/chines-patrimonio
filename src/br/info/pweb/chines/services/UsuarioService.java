@@ -20,14 +20,16 @@ public class UsuarioService {
 	public Usuario buscarEmailSenha(Usuario usuario, BindingResult brUsuario) 
 			throws MyValidationException, MyEntityNotFoundException {
 		
-		if (brUsuario.hasFieldErrors("email") || brUsuario.hasFieldErrors("senha")) {
+		if (brUsuario.hasFieldErrors("email") || brUsuario.hasFieldErrors("senha")) 
+		{
 			throw new MyValidationException();
 		}
 		
 		usuario.HashearSenha();
 		Usuario usuarioLogado = usuarioDAO.buscarEmailSenha(usuario.getEmail(), usuario.getSenha());
 		
-		if (usuarioLogado == null) {
+		if (usuarioLogado == null) 
+		{
 			throw new MyEntityNotFoundException();
 		}
 		
@@ -41,7 +43,8 @@ public class UsuarioService {
 	public Usuario buscar(Long id) throws MyEntityNotFoundException {
 		Usuario usuarioBuscado = usuarioDAO.buscar(id);
 		
-		if (usuarioBuscado == null) {
+		if (usuarioBuscado == null) 
+		{
 			throw new MyEntityNotFoundException();
 		}
 		
