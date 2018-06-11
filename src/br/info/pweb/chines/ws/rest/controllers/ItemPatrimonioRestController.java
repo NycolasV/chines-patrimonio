@@ -20,7 +20,7 @@ import br.info.pweb.chines.services.ItemPatrimonioService;
 import br.info.pweb.chines.utils.MapUtils;
 
 @RestController
-@RequestMapping("/rest/item-patrimonios")
+@RequestMapping("/rest/itens")
 public class ItemPatrimonioRestController {
 
 	@Autowired
@@ -45,17 +45,6 @@ public class ItemPatrimonioRestController {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
-	
-//	@GetMapping("/{id}")
-//	public ResponseEntity<Object> buscarPatrimonio(@PathVariable Long id) {		
-//		try {
-//			return ResponseEntity.ok(itemPatrimonioService.buscarPatrimonio(id));
-//		} catch (MyEntityNotFoundException e) {
-//			return ResponseEntity.notFound().build();
-//		} catch (Exception e) {
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-//		}
-//	}
 
 	@PostMapping
 	public ResponseEntity<Object> persistir(@RequestBody @Valid 
@@ -65,8 +54,26 @@ public class ItemPatrimonioRestController {
 			return ResponseEntity.ok(itemPatrimonioService.persistir(itemPatrimonio, brItemPatrimonio));
 		} catch (MyValidationException e) {
 			return ResponseEntity.unprocessableEntity().body(MapUtils.mapFrom(brItemPatrimonio));
+		} catch (MyEntityNotFoundException e) {
+			return ResponseEntity.notFound().build();
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
 		}
 	}
+	
+//	@PutMapping("/{id}")
+//	public ResponseEntity<Object> alterar(@PathVariable Long id, @RequestBody @Valid 
+//			ItemPatrimonio itemPatrimonio, BindingResult brItemPatrimonio) {
+//
+//		try {
+//			return ResponseEntity.ok(itemPatrimonioService.alterar(id, categoriaOcorrencia, brCategoria));
+//		} catch (ValidacaoException e) {
+//			return ResponseEntity.unprocessableEntity()
+//					.body(MapUtils.mapaDe(brCategoria)); 
+//		}catch (EntidadeNaoEncontradaException e) {
+//			return ResponseEntity.notFound().build(); 
+//		} catch (Exception e) {
+//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build(); 
+//		}
+//	}
 }

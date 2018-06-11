@@ -53,9 +53,7 @@ public class ItemPatrimonioJPA implements ItemPatrimonioDAO {
 	@Override
 	@SuppressWarnings("unchecked")
 	public List<ItemPatrimonio> buscarPatrimonio(Long id) {
-		String hql = "FROM ItemPatrimonio i "
-				+ "INNER JOIN Patrimonio p WHERE i.patrimonio_id = :p.id AND p.id = :id";
-		
+		String hql = "FROM itemPatrimonio i WHERE i.id = :id";
 		Query query = sessionFactory.getCurrentSession().createQuery(hql);
 		query.setParameter("id", id);
 		

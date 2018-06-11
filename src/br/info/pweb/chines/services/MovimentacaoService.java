@@ -46,9 +46,9 @@ public class MovimentacaoService {
 		return movimentacaoBuscada;
 	}
 	
-	public ItemPatrimonio movimentar(Long id, ItemPatrimonio itemPatrimonio,
+	public Movimentacao movimentar(Long id, ItemPatrimonio itemPatrimonio,
 			BindingResult brItemPatrimonio) throws MyValidationException, MyEntityNotFoundException  {
-
+		
 		if (brItemPatrimonio.hasErrors())
 		{			
 			throw new MyValidationException();
@@ -57,6 +57,8 @@ public class MovimentacaoService {
 		ItemPatrimonio itemMovimentado = itemPatrimonioService.buscar(id);
 		
 		Movimentacao movimentacao = new Movimentacao();
+		movimentacao = buscar(itemPatrimonio.getAmbienteAtual().getId());
+		
 		movimentacao.setItem(itemMovimentado);	
 		movimentacao.setDataMovimentacao(new Date());
 		
@@ -76,9 +78,9 @@ public class MovimentacaoService {
 		itemMovimentado.setDataAtualizacao(new Date());
 		itemMovimentado.setAmbienteAtual(itemPatrimonio.getAmbienteAtual());
 		
-		movimentacaoDAO.persistir(movimentacao);
 		itemPatrimonioDAO.alterar(itemMovimentado);
+		movimentacaoDAO.persistir(movimentacao);
 		
-		return itemMovimentado;
+		return movimentacao;
 	}
 }
